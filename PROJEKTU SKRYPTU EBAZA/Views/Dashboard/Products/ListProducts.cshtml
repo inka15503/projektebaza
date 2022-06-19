@@ -1,0 +1,62 @@
+﻿@model List<Product>
+
+@{
+    //Wyświetla taki tytuł strony w karcie przeglądarki
+
+    ViewData["Title"] = "Lista Produktów";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1>Tutaj znajdziesz listę wszystkich Produktów</h1>
+    </div>
+</div>
+<a href="@Url.Action("AddProduct")" class="btn btn-primary my-3">Dodaj Produkt</a>
+<div class="card">
+    <div class="card-body">
+
+        <div class="text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">EAN</th>
+                        <th scope="col">Cena</th>
+                        <th scope="col">Cena Promocyjna</th>
+                        <th scope="col">Dostawca</th>
+                        <th scope="col">Kategoria</th>
+                        <th scope="col">Obrazek</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <th scope="row">@item.Name</th>
+                        <td>@item.EAN</td>
+                        <td>@item.Price.ToString("N2") zł</td>
+                        <td>@(item.Discount != null?item.Discount?.ToString("N2") + "zł":"")</td>
+                        <td>@(item.Supplier!=null?item.Supplier.Name:"")</td>
+                        <td>@(item.Category!=null?item.Category.CategoryName:"")</td>
+                        <td><img class="img-thumbnail" src="@item.ImgPath" style="height:40px;" /></td>
+                        <td><a href="@Url.Action("EditProduct", new {id = item.Id})"><i class="fa-solid fa-pen-to-square text-success"></i></a></td>
+                        <td>
+                            <form method="post" asp-action="RemoveProduct" asp-route-id="@item.Id">
+                                <button type="submit" class="btn-remove"> <i class="fa-solid fa-trash  text-danger"></i></button>
+
+                            </form>
+                       
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+</div>

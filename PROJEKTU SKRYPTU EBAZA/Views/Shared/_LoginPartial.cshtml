@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a>
+    </li>
+
+    @* Jeżeli użytkownik jest zalogowany to wyświetli te przekierowania w nawigacji *@
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Dashboard" asp-action="Home">Panel</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Products">Produkty</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Suppliers">Dostawcy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-area="" asp-controller="Dashboard" asp-action="Categories">Kategorie Produktu</a>
+        </li>
+
+    }
+
+
+</ul>
+
+<ul class="navbar-nav">
+    @* Jeżeli użytkownik jest zalogowany to wyświetli te przekierowania w nawigacji *@
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <span class="nav-link ">Cześć @User.Identity.Name!</span>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link">Wyloguj</button>
+            </form>
+        </li>
+    }
+    @* Jeżeli użytkownik nie jest zalogowany to wyświetli te przekierowania w nawigacji *@
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link " asp-area="Identity" asp-page="/Account/Register">Zarejestruj</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link " asp-area="Identity" asp-page="/Account/Login">Zaloguj</a>
+        </li>
+    }
+</ul>

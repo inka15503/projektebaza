@@ -1,0 +1,44 @@
+﻿@{
+    //Wyświetla taki tytuł strony w karcie przeglądarki
+    ViewData["Title"] = "Panel zarządzenia";
+}
+
+<div class="row">
+    <div class="col-4 mb-2">
+        <div class="card text-center">
+            <img class="card-img-top" src="~/img/photos/products.jpg" alt="Card image cap">
+            <div class="card-body">
+                @*<h5 class="card-title">Card title</h5>*@
+
+                <a href="@Url.Action("Products")" class="btn btn-primary">Lista Produktów</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 mb-2">
+        <div class="card text-center">
+            <img class="card-img-top" src="~/img/photos/supplier.png" alt="Card image cap">
+            <div class="card-body">
+                @*<h5 class="card-title">Card title</h5>*@
+
+
+                <a href="@Url.Action("Suppliers")" class="btn btn-primary">Lista Dostawców</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 mb-2">
+        <div class="card text-center">
+            <img class="card-img-top" src="~/img/photos/category.png" alt="Card image cap">
+            <div class="card-body">
+                @*<h5 class="card-title">Card title</h5>*@
+
+
+                <a href="@Url.Action("Categories")" class="btn btn-primary">Lista Kategorii</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+

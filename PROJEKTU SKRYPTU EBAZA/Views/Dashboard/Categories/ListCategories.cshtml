@@ -1,0 +1,56 @@
+﻿@model List<ProductCategory>
+
+@{
+    //Wyświetla taki tytuł strony w karcie przeglądarki
+
+    ViewData["Title"] = "Lista Kategorii";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h1>Tutaj znajdziesz listę wszystkich kategorii</h1>
+    </div>
+</div>
+<a href="@Url.Action("AddCategory")" class="btn btn-primary my-3">Dodaj Kategorie</a>
+<div class="card">
+    <div class="card-body">
+
+        <div class="text-center">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Ilość produktów</th>
+                        <th>Edytuj</th>
+                        <th>Usuń</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <th scope="row">@item.CategoryName</th>
+                        <td>@item.Products.Count</td>
+                        <td><a href="@Url.Action("EditCategory", new {id=item.Id})"><i class="fa-solid fa-pen-to-square text-success"></i></a></td>
+                        <td>
+
+                            <form method="post" asp-action="RemoveCategory" asp-route-id="@item.Id">
+                                <button type="submit" class="btn-remove"> <i class="fa-solid fa-trash  text-danger"></i></button>
+
+                            </form>
+
+                          
+                        </td>
+
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+</div>
